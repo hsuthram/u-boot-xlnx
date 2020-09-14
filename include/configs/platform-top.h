@@ -66,7 +66,11 @@
 	"bootsize=0x500000\0" \ 
 	"bootstart=0x0\0" \ 
 	"boot_img=BOOT.BIN\0" \ 
+        "bootargs=console=ttyPS0,115200n8 root=/dev/mmcblk1p2 rw rootfstype=ext4 rootwait\0" \
 	"load_boot=tftpboot ${clobstart} ${boot_img}\0" \ 
+	"loadbit_addr=0x4000000\0" \
+	"bitstream_image=design_1_wrapper.bit\0" \
+	"mmc_loadbit_fat=echo Loading bistream from media to RAM..; && mmc dev 1 && fatload mmc 1 ${loadbit_addr} ${bitstream_image} && fpga loadb 0 ${loadbit_addr} ${filesize}\0" \
 	"update_boot=setenv img boot; setenv psize ${bootsize}; setenv installcmd \"install_boot\"; run load_boot test_img; setenv img; setenv psize; setenv installcmd\0" \ 
 	"sd_update_boot=echo Updating boot from SD; mmcinfo && fatload mmc ${sdbootdev}:1 ${clobstart} ${boot_img} && run install_boot\0" \ 
 	"install_boot=sf probe 0 && sf erase ${bootstart} ${bootsize} && " \ 
@@ -99,5 +103,5 @@
 /* BOOTCOMMAND */
 #ifdef CONFIG_BOOTCOMMAND
 #undef CONFIG_BOOTCOMMAND
-#define CONFIG_BOOTCOMMAND	"mmc dev ${sdbootdev}; run default_bootcmd"
+#define CONFIG_BOOTCOMMAND	"mmc dev ${sdbootdev};run mmc_loadbit_fat ;run default_bootcmd"
 #endif
