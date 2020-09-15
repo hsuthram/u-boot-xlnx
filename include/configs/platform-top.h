@@ -65,8 +65,8 @@
 	"loadaddr=0x10000000\0" \ 
 	"bootsize=0x500000\0" \ 
 	"bootstart=0x0\0" \ 
-	"boot_img=BOOT.BIN\0" \ 
-        "bootargs=console=ttyPS0,115200n8 root=/dev/mmcblk1p2 rw rootfstype=ext4 rootwait\0" \
+	"boot_img=BOOT.BIN\0" \
+	"bootargs=console=ttyPS0,115200n8 root=/dev/mmcblk1p2 rw rootfstype=ext4 rootwait\0" \ 
 	"load_boot=tftpboot ${clobstart} ${boot_img}\0" \ 
 	"update_boot=setenv img boot; setenv psize ${bootsize}; setenv installcmd \"install_boot\"; run load_boot test_img; setenv img; setenv psize; setenv installcmd\0" \ 
 	"sd_update_boot=echo Updating boot from SD; mmcinfo && fatload mmc ${sdbootdev}:1 ${clobstart} ${boot_img} && run install_boot\0" \ 
@@ -97,6 +97,7 @@
 	"netboot=tftpboot ${netstart} ${kernel_img} && bootm\0" \ 
 	"default_bootcmd=run uenvboot; run cp_kernel2ram && bootm ${netstart}\0" \ 
 ""
+
 /* BOOTCOMMAND */
 #ifdef CONFIG_BOOTCOMMAND
 #undef CONFIG_BOOTCOMMAND
