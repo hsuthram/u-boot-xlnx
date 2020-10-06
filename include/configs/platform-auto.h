@@ -47,6 +47,16 @@
 
 /* sdio - ps7_sd_1 */
 
+/* i2c - ps7_i2c_0 */
+#define CONFIG_ZYNQ_I2C0
+#define CONFIG_SYS_I2C_ZYNQ
+#define CONFIG_SYS_I2C
+#define CONFIG_SYS_I2C_ZYNQ_SLAVE	0
+#define CONFIG_SYS_I2C_ZYNQ_SPEED 100000
+
+/* i2c - ps7_i2c_1 */
+#define CONFIG_ZYNQ_I2C1
+
 /* devcfg - ps7_dev_cfg_0 */
 #define CONFIG_FPGA_ZYNQPL
 
